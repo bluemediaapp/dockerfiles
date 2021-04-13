@@ -7,13 +7,15 @@ services:
     environment:
       - port=:5000
       - mongo_uri=mongodb://database
+    env_file:
+      - .env
     ports:
       - 2865:5000
-
     links:
       - recommended
       - interactions
       - data-outlet
+
 
   recommended:
     build:
