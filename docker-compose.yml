@@ -7,6 +7,8 @@ services:
     environment:
       - port=:5000
       - mongo_uri=mongodb://database
+    ports:
+      - 2865:5000
 
   recommended:
     build:
