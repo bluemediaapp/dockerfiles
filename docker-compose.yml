@@ -10,6 +10,11 @@ services:
     ports:
       - 2865:5000
 
+    links:
+      - recommended
+      - interactions
+      - data-outlet
+
   recommended:
     build:
       context: recommendation-service
@@ -17,6 +22,8 @@ services:
     environment:
       - port=:5000
       - mongo_uri=mongodb://database
+    links:
+      - database
 
   interactions:
     build:
@@ -25,6 +32,8 @@ services:
     environment:
       - port=:5000
       - mongo_uri=mongodb://database
+    links:
+      - database
 
   data-outlet:
     build:
@@ -33,3 +42,13 @@ services:
     environment:
       - port=:5000
       - mongo_uri=mongodb://database
+    links:
+      - database
+
+  database:
+    image: mongo:4.0
+    volumes:
+      - bluemediadb:/data/db
+
+volumes:
+  bluemediadb:
