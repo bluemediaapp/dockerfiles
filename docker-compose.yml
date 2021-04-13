@@ -1,0 +1,33 @@
+version: "3"
+services:
+  gateway:
+    build:
+      context: gateway
+      dockerfile: Dockerfile
+    environment:
+      - port=:5000
+      - mongo_uri=mongodb://database
+
+  recommended:
+    build:
+      context: recommendation-service
+      dockerfile: Dockerfile
+    environment:
+      - port=:5000
+      - mongo_uri=mongodb://database
+
+  interactions:
+    build:
+      context: interactions
+      dockerfile: Dockerfile
+    environment:
+      - port=:5000
+      - mongo_uri=mongodb://database
+
+  data-outlet:
+    build:
+      context: data-outlet
+      dockerfile: Dockerfile
+    environment:
+      - port=:5000
+      - mongo_uri=mongodb://database
