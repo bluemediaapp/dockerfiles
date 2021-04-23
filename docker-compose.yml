@@ -15,6 +15,7 @@ services:
       - recommended
       - interactions
       - data-outlet
+      - cdn
 
 
   recommended:
@@ -40,6 +41,16 @@ services:
   data-outlet:
     build:
       context: data-outlet
+      dockerfile: Dockerfile
+    environment:
+      - port=:5000
+      - mongo_uri=mongodb://database
+    links:
+      - database
+
+  cdn:
+    build:
+      context: cdn
       dockerfile: Dockerfile
     environment:
       - port=:5000

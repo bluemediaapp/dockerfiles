@@ -10,3 +10,6 @@
 [submodule "recommendation-service"]
 	path = recommendation-service
 	url = https://github.com/bluemediaapp/recommendation-service
+[submodule "cdn"]
+	path = cdn
+	url = https://github.com/bluemediaapp/cdn
