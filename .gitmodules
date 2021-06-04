@@ -13,3 +13,6 @@
 [submodule "cdn"]
 	path = cdn
 	url = https://github.com/bluemediaapp/cdn
+[submodule "users"]
+	path = users
+	url = https://github.com/bluemediaapp/users

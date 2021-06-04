@@ -16,8 +16,17 @@ services:
       - interactions
       - data-outlet
       - cdn
+      - users
 
-
+  users:
+      build:
+          context: users 
+          dockerfile: Dockerfile
+      links:
+          - database  
+      environment:
+          - port=:5000
+          - mongo_uri=mongodb://database
   recommended:
     build:
       context: recommendation-service
@@ -62,6 +71,7 @@ services:
     image: mongo:4.0
     volumes:
       - bluemediadb:/data/db
-
+    ports:
+      - 27017:27017
 volumes:
   bluemediadb:
