@@ -4,6 +4,7 @@ from os import system
 
 git_mode = False
 if "git" in argv:
+    git_mode = True
     print("Cloning in git mode...")
 
 projects = open("projects").readlines()
