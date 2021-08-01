@@ -5,4 +5,5 @@
 ```env
 JWT_SECRET=FILL_ME_OUT # The password protecting all your users login sessions.
 ```
+3. Create assets. Move into the avatargen directory and run `python3 maketemplates.py`
 3. Run it! Should be done by just using `docker-compose up -d --build`. Blue will now be serving on port `2865`
