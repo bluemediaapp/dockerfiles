@@ -18,16 +18,17 @@ services:
       - cdn
       - users
       - videos
+      - avatargen
 
   users:
-      build:
-          context: users 
-          dockerfile: Dockerfile
-      links:
-          - database  
-      environment:
-          - port=:5000
-          - mongo_uri=mongodb://database
+    build:
+      context: users 
+      dockerfile: Dockerfile
+    links:
+      - database  
+    environment:
+      - port=:5000
+      - mongo_uri=mongodb://database
   recommended:
     build:
       context: recommendation-service
@@ -67,6 +68,12 @@ services:
       - mongo_uri=mongodb://database
     links:
       - database
+  avatargen:
+    build:
+      context: avatargen
+      dockerfile: Dockerfile
+    environment:
+      - PORT=:5000
   videos:
     build:
       context: videos
