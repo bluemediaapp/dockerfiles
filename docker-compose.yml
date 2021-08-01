@@ -17,6 +17,7 @@ services:
       - data-outlet
       - cdn
       - users
+      - videos
 
   users:
       build:
@@ -66,6 +67,16 @@ services:
       - mongo_uri=mongodb://database
     links:
       - database
+  videos:
+    build:
+      context: videos
+      dockerfile: Dockerfile
+    environment:
+      - port=:5000
+      - mongo_uri=mongodb://database
+    links:
+      - database
+
 
   database:
     image: mongo:4.0
