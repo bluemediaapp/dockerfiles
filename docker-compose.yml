@@ -2,16 +2,24 @@ version: "3"
 services:
   gateway:
     build:
-      context: gateway
+      context: new-gateway
       dockerfile: Dockerfile
     environment:
-      - port=:5000
       - mongo_uri=mongodb://database
+      - INTERNAL_URL_RECOMMENDED=http://recommended:5000
+      - INTERNAL_URL_INTERACTIONS=http://interactions:5000
+      - INTERNAL_URL_DATA=http://data-outlet:5000
+      - INTERNAL_URL_CDN=http://cdn:5000
+      - INTERNAL_URL_USERS=http://users:5000
+      - INTERNAL_URL_VIDEOS=http://videos:5000
+      - INTERNAL_URL_AVATARGEN=http://avatargen:5000
     env_file:
       - .env
     ports:
       - 2865:5000
     links:
+      - database
+
       - recommended
       - interactions
       - data-outlet
@@ -22,13 +30,15 @@ services:
 
   users:
     build:
-      context: users 
+      context: new-users 
       dockerfile: Dockerfile
     links:
       - database  
     environment:
       - port=:5000
       - mongo_uri=mongodb://database
+    env_file:
+      - .env
   recommended:
     build:
       context: recommendation-service
@@ -89,5 +99,7 @@ services:
     image: mongo:4.0
     volumes:
       - bluemediadb:/data/db
+    ports:
+      - 27017:27017
 volumes:
   bluemediadb:
